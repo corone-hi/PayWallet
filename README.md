@@ -40,15 +40,12 @@ $ npm i react-native-swiper --save
 
 <br/>
 
-react-native-camera-kit
+https://github.com/react-native-camera/react-native-camera
 
 ```
-npm install react-native-camera-kit --save
+yarn add react-native-camera@git+https://git@github.com/react-native-community/react-native-camera.git @react-native-community/cameraroll
 
-cd ios
-pod install
-cd ..
-
+cd ios && pod install && cd ..
 ```
 
 
