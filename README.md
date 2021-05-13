@@ -35,3 +35,20 @@ https://github.com/leecade/react-native-swiper
 $ npm i react-native-swiper --save
 
 ```
+
+
+
+<br/>
+
+react-native-camera-kit
+
+```
+npm install react-native-camera-kit --save
+
+cd ios
+pod install
+cd ..
+
+```
+
+
