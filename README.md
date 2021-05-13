@@ -29,10 +29,9 @@ React Native
 
 <br/>
 
-https://github.com/intellidev1991/react-native-image-slider-box
+https://github.com/leecade/react-native-swiper
 
 ```
-npm i react-native-image-slider-box
-yarn add react-native-image-slider-box
+$ npm i react-native-swiper --save
 
 ```
