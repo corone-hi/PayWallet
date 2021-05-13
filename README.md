@@ -25,3 +25,8 @@ React Native
 
 ` npm install --save-dev @bam.tech/react-native-make //error발생`
 ` npm install --save react-native-splash-screen`
+
+
+<br/>
+
+https://github.com/intellidev1991/react-native-image-slider-box
