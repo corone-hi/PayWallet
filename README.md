@@ -72,7 +72,7 @@ https://github.com/react-navigation/react-navigation/tree/main/packages/material
 
 
 ```
-@react-navigation/material-top-tabs
+npm install --save @react-navigation/material-top-tabs react-native-tab-view
 
 ```
 
