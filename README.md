@@ -49,3 +49,20 @@ cd ios && pod install && cd ..
 ```
 
 
+<br/>
+
+https://blog.hackajob.co/how-to-build-a-qrcode-reader-using-reactnative/
+
+```
+
+npm install react-native-camera —save
+
+react-native link react-native-camera
+
+npm install react-native-qrcode-scanner —save
+
+react-native link react-native-qrcode-scanner
+
+```
+
+
