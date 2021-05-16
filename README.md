@@ -76,6 +76,13 @@ npm install --save @react-navigation/material-top-tabs react-native-tab-view
 
 ```
 
+
+<br/>
+
+```
+$ npm install --save react-native-vector-icons
+```
+
 https://github.com/wix/react-native-calendars
 
 ```
