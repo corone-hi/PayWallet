@@ -76,3 +76,12 @@ npm install --save @react-navigation/material-top-tabs react-native-tab-view
 
 ```
 
+https://github.com/wix/react-native-calendars
+
+```
+$ npm install --save react-native-calendars
+
+```
+
+
+
