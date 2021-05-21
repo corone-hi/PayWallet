@@ -118,5 +118,8 @@ cd ios/ && pod install
 
 ```
 
+<br/>
 
+https://momentjs.com/docs/
+`npm install moment`
 
