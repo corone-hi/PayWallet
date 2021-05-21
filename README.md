@@ -91,4 +91,20 @@ $ npm install --save react-native-calendars
 ```
 
 
+<br/>
+
+
+```
+
+# Using npm
+npm install --save @react-native-firebase/app
+
+# Using Yarn
+yarn add @react-native-firebase/app
+
+
+
+```
+
+
 
