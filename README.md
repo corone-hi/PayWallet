@@ -102,6 +102,7 @@ npm install --save @react-native-firebase/app
 # Using Yarn
 yarn add @react-native-firebase/app
 
+
 ```
 
 
@@ -115,6 +116,15 @@ yarn add @react-native-firebase/firestore
 
 # If you're developing your app using iOS, run this command
 cd ios/ && pod install
+
+```
+```
+
+# Install the database module
+yarn add @react-native-firebase/database
+
+# If you're developing your app using iOS, run this command
+cd ios/ && pod install && cd ..
 
 ```
 
