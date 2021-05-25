@@ -133,3 +133,12 @@ cd ios/ && pod install && cd ..
 https://momentjs.com/docs/
 `npm install moment`
 
+
+
+<br/>
+
+https://www.npmjs.com/package/react-hook-popup
+
+```
+npm i react-hook-popup
+```
