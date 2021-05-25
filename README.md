@@ -137,8 +137,3 @@ https://momentjs.com/docs/
 
 <br/>
 
-https://www.npmjs.com/package/react-hook-popup
-
-```
-npm i react-hook-popup
-```
