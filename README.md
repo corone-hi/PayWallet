@@ -137,3 +137,6 @@ https://momentjs.com/docs/
 
 <br/>
 
+https://rnfirebase.io/auth/usage
+
+`yarn add @react-native-firebase/auth`
