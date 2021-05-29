@@ -140,3 +140,8 @@ https://momentjs.com/docs/
 https://rnfirebase.io/auth/usage
 
 `yarn add @react-native-firebase/auth`
+
+
+<br/>
+
+https://www.npmjs.com/package/react-native-get-sms-android
