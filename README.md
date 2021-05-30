@@ -164,6 +164,8 @@ $ react-native link react-native-get-sms-android
 
 **<react debugger>**
  
+[출처](https://velog.io/@link717/TIL-React-Native-Debugging-Tool-%EC%82%AC%EC%9A%A9%EB%B2%95Window)
+ 
 >react-devtools
 ```
 yarn global add react-devtools 또는 npm install -g react-devtools
