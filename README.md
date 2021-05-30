@@ -158,3 +158,27 @@ $ react-native link react-native-android-sms-listener
 $ npm install react-native-get-sms-android --save
 $ react-native link react-native-get-sms-android
 ```
+
+
+<br/>
+
+**<react debugger>**
+ 
+>react-devtools
+```
+yarn global add react-devtools 또는 npm install -g react-devtools
+react-native-debugger-open
+npm i --save-dev react-native-debugger-open # or -g
+``` 
+package.json의 scripts 위치에 아래 key-value를 추가한다.
+```
+"scripts": {
+  "postinstall": "rndebugger-open"
+}
+```
+
+`npm run postinstall`를 터미널에 입력하여 setting을 마무리한다.
+
+› 정상적으로 setting이 완료되었다면 PASS라는 message가 뜬다.
+ 
+ 
