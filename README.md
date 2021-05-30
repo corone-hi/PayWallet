@@ -149,16 +149,12 @@ https://www.npmjs.com/package/react-native-get-sms-android
 https://www.npmjs.com/package/react-native-android-sms-listener
 
 ```
-
 $ npm install --save react-native-android-sms-listener
 $ react-native link react-native-android-sms-listener
+```
+
 
 ```
 $ npm install react-native-get-sms-android --save
 $ react-native link react-native-get-sms-android
-
-```
-
-
-
 ```
