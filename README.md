@@ -183,4 +183,4 @@ package.json의 scripts 위치에 아래 key-value를 추가한다.
 
 › 정상적으로 setting이 완료되었다면 PASS라는 message가 뜬다.
  
- 
+ (https://www.npmjs.com/package/react-native-debugger-open)
