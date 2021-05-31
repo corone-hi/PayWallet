@@ -1,13 +1,16 @@
+
 import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import Navigator from '~/Screens/Navigator';
 
 import {UserContextProvider} from '~/Context/User';
 
+
 import SmsListener from 'react-native-android-sms-listener';
 import SmsAndroid from 'react-native-get-sms-android';
 
 const App = () => {
+  
   useEffect(() => {
     const filter = {
       box: 'inbox',
@@ -36,6 +39,7 @@ const App = () => {
     return () => subscribe.remove();
   }, []);
 
+  
   return (
     <UserContextProvider>
       <StatusBar barStyle="light-content" />
