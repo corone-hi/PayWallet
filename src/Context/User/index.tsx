@@ -49,12 +49,12 @@ const UserContextProvider = ({children}: Props) => {
       database()
         .ref(`users/${userInfo}`)
         .on('value', snapshot => {
-          //console.log('User data: ', snapshot.val());
+          console.log('User: ', snapshot.val());
           setUserData(snapshot.val());
           //data = {user: snapshot.val()};
         });
      //setUserData(data);
-     console.log(userData);
+      console.log("userdata:", userData);
       setIsLoading(true);
     } catch (e) {
       console.log(e);
