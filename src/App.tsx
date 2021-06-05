@@ -4,16 +4,17 @@ import Navigator from '~/Screens/Navigator';
 
 import {UserContextProvider} from '~/Context/User';
 
-import {SMSDataContextProvider} from '~/Context/SMSData';
+import {SMSDataContextProvider} from '~/lib/SMSData';
 
 const App = () => {
   return (
-    <SMSDataContextProvider>
-      <UserContextProvider>
+    <SMSDataContextProvider> 
+     <UserContextProvider>
         <StatusBar barStyle="light-content" />
         <Navigator />
       </UserContextProvider>
     </SMSDataContextProvider>
   );
 };
+
 export default App;

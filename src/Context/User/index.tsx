@@ -52,9 +52,9 @@ const UserContextProvider = ({children}: Props) => {
           console.log('User: ', snapshot.val());
           setUserData(snapshot.val());
           //data = {user: snapshot.val()};
+          console.log("userdata:", userData);
         });
      //setUserData(data);
-      console.log("userdata:", userData);
       setIsLoading(true);
     } catch (e) {
       console.log(e);
