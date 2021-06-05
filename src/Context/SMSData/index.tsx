@@ -7,7 +7,7 @@ import SmsAndroid from 'react-native-get-sms-android';
 
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
-import {UserContext} from '../User';
+
 
 const defaultContext: ISMSDataContext = {
   /*isLoading: false,
@@ -89,8 +89,6 @@ const SMSDataContextProvider = ({children}: Props) => {
 
   console.log('body:', body);
 
-  const {userInfo, userData} = useContext<IUserContext>(UserContext);
-
   useEffect(() => {
     if (body.includes('승인') || !body.includes('취소')) {
       //body.replace(/취소/, '');
@@ -98,21 +96,25 @@ const SMSDataContextProvider = ({children}: Props) => {
       body = body.replace(/\[[*ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+\]/, '');
       body = body.replace(/[*ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+승인/, '');
       body = body.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣\*]{2,4}님/, '');
+      body = body.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣\*]{2,4}/, '');
 
       const moneyrule = /[\d,\-]+원/;
       let money = moneyrule.exec(body);
+      money = String(money);
       console.log('money:', money); //완료
 
       body = body.replace(moneyrule, '');
 
       const timerule = /\d\d:\d\d/;
       let time = timerule.exec(body);
+      time = String(time);
       console.log('time:', time); //완료
 
       body = body.replace(timerule, '');
 
       const daterule = /\d\d\/\d\d/;
       let date = daterule.exec(body);
+      date = String(date);
       console.log('date:', date); //완료
 
       body = body.replace(daterule, '');
@@ -121,12 +123,12 @@ const SMSDataContextProvider = ({children}: Props) => {
       console.log('shopname:', shopname);
 
       console.log('body:', body);
-      console.log('userInfo:', userInfo);
-      console.log('userdata:', userData);
+      
+      let user = auth().currentUser;
 
-      if (body && userInfo) {
+      if (body && user) {
         database()
-          .ref(`/user_wallet/${userInfo}/@${messageData.timestamp}`)
+          .ref(`/user_wallet/${user.uid}/@${messageData.timestamp}`)
           .set({
             date: date,
             time: time,

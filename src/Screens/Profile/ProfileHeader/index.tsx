@@ -33,15 +33,18 @@ const LabelTitle = Styled.Text`
   font-weight: 300;
 `;
 interface Props {
-  image: string;
+  //image: string;
   name: string;
 }
 
-const ProfileHeader = ({image, name}: Props) => {
+const ProfileHeader = ({name}: Props) => {
   return (
     <Container>
       <ProfileImageContainer>
-        <ProfileImage source={{uri: image}} style={{width: 70, height: 70}} />
+        <ProfileImage
+          source={require('~/Assets/Images/ic_profile.png')}
+          style={{width: 70, height: 70}}
+        />
       </ProfileImageContainer>
       <ProfileContent>
         <LabelContainer>

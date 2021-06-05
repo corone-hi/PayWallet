@@ -4,7 +4,7 @@ import Navigator from '~/Screens/Navigator';
 
 import {UserContextProvider} from '~/Context/User';
 
-import {SMSDataContextProvider} from '~/lib/SMSData';
+import {SMSDataContextProvider} from '~/Context/SMSData';
 
 const App = () => {
   return (

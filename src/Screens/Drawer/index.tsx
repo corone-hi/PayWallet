@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import Styled from 'styled-components/native';
 
 import {
@@ -7,9 +7,11 @@ import {
   DrawerContentOptions,
 } from '@react-navigation/drawer';
 
-
 import {UserContext} from '~/Context/User';
 import ProfileHeader from '~/Screens/Profile/ProfileHeader';
+
+import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
 
 const Header = Styled.View`
   border-bottom-width: 1px;
@@ -55,26 +57,40 @@ const Footer = Styled.View`
   border-color: #D3D3D3;
 `;
 
-
-
-
 interface Props {
   props: DrawerContentComponentProps<DrawerContentOptions>;
 }
 
-
-
-const Drawer = ({props, props2}: Props) => {
+const Drawer = ({props}: Props) => {
   const {logout} = useContext<IUserContext>(UserContext);
+
+  const [username, setUsername] = useState('사용자');
+
+  useEffect(() => {
+    let user = auth().currentUser;
+
+    if (user) {
+      try {
+        database()
+          .ref(`users/${user.uid}`)
+          .on('value', snapshot => {
+            const userObj = snapshot.val();
+            setUsername(userObj.name);
+          });
+        console.log('username:', username);
+        //setUserData(data);
+      } catch (e) {
+        console.log(e);
+        Alert.alert(e);
+      }
+    }
+  }, []);
 
   return (
     <DrawerContentScrollView {...props}>
       <Header>
         <HeaderContainer>
-          <ProfileHeader
-          image="http://api.randomuser.me/portraits/women/68.jpg"
-          name = "sara"/>
-         
+          <ProfileHeader name={username} />
         </HeaderContainer>
       </Header>
       <Button onPress={() => props.navigation.navigate('Pay')}>
@@ -99,7 +115,6 @@ const Drawer = ({props, props2}: Props) => {
         <Button
           onPress={() => {
             logout();
-           
           }}>
           <LogoutContainer>
             <Icon
