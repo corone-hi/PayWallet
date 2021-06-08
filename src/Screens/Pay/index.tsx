@@ -89,20 +89,7 @@ const Pay = ({navigation}: Props) => {
     <Container>
       <PayContainer>
         <Swiper showsButtons={true}>
-          <SwipeContainer>
-            <PayName>카카오페이</PayName>
-            <PayImage>
-              <Image style={{width: "90%", height:"90%"}}
-                  source={require('~/Assets/Images/Pay/kakao.jpg')}/>
-            </PayImage>
-          </SwipeContainer>
-          <SwipeContainer>
-            <PayName>네이버페이</PayName>
-            <PayImage>
-              <Image style={{width: "90%", height:"90%"}}
-                  source={require('~/Assets/Images/Pay/naver.jpg')}/>
-            </PayImage>
-          </SwipeContainer>
+          
           <SwipeContainer>
             <PayName>기타 결제 방식</PayName>
             <PayImage>

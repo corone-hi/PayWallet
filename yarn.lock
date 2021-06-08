@@ -6069,6 +6069,11 @@ react-native-screens@^3.1.1:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-3.2.0.tgz#e2c8a4879c72f49af5b49e8859c84978a95d112b"
   integrity sha512-pV4a32neQA69xhVsL9k1J/rM/SiP5zgGHjJsnNVEcuhBu+dlsutT2YFszQN4MgpP2dhHHu1O7DyRSHti+wh7Wg==
 
+react-native-select-dropdown@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-select-dropdown/-/react-native-select-dropdown-1.0.6.tgz#62786404801c60805f56bb9a6e7477c49a53abfe"
+  integrity sha512-FVwllKL8rzz99XijVAOEhcS0XPhEKeprn18dO4ridEO4J2tGQZSyvswtaJ+Gl0EwVk397z/c+GgdYj8C/yRveA==
+
 react-native-snap-carousel@*:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/react-native-snap-carousel/-/react-native-snap-carousel-3.9.1.tgz#6fd9bd8839546c2c6043a41d2035afbc6fe0443e"

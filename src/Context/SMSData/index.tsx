@@ -8,15 +8,8 @@ import SmsAndroid from 'react-native-get-sms-android';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 
-
 const defaultContext: ISMSDataContext = {
-  /*isLoading: false,
-  userInfo: undefined,
-  userData: undefined,
-  login: (email: string, password: string) => {},
-  register: (email: string, password: string, name: string, tel: string) => {},
-  getUserInfo: () => {},
-  logout: () => {},*/
+  setData: (category: string, date: Date, shop: string, money: string) => {},
 };
 
 const SMSDataContext = createContext(defaultContext);
@@ -123,7 +116,7 @@ const SMSDataContextProvider = ({children}: Props) => {
       console.log('shopname:', shopname);
 
       console.log('body:', body);
-      
+
       let user = auth().currentUser;
 
       if (body && user) {
@@ -131,7 +124,6 @@ const SMSDataContextProvider = ({children}: Props) => {
           .ref(`/user_wallet/${user.uid}/@${messageData.timestamp}`)
           .set({
             date: date,
-            time: time,
             shop: shopname,
             money: money,
           });
@@ -139,8 +131,30 @@ const SMSDataContextProvider = ({children}: Props) => {
     }
   }, [body]);
 
+  const setData = (
+    category: string,
+    date: Date,
+    shop: string,
+    money: string,
+  ) => {
+    let timestamp = date.getTime();
+    let user = auth().currentUser;
+
+    database().ref(`/user_wallet/${user.uid}/@${timestamp}`).set({
+      category: category,
+      date: date,
+      shop: shop,
+      money: money,
+    });
+  };
+
   return (
-    <SMSDataContext.Provider value={{}}>{children}</SMSDataContext.Provider>
+    <SMSDataContext.Provider
+      value={{
+        setData,
+      }}>
+      {children}
+    </SMSDataContext.Provider>
   );
 };
 

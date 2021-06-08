@@ -105,7 +105,6 @@ const UserContextProvider = ({children}: Props) => {
     <UserContext.Provider
       value={{
         userInfo,
-        userData,
         setUserData,
         isLoading,
         login,
