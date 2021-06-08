@@ -159,4 +159,9 @@ $ npm install react-native-get-sms-android --save
 $ react-native link react-native-get-sms-android
 ```
 
+https://www.npmjs.com/package/react-native-select-dropdown
 
+```
+
+npm i react-native-select-dropdown
+```
