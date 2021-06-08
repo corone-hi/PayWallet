@@ -165,3 +165,12 @@ https://www.npmjs.com/package/react-native-select-dropdown
 
 npm i react-native-select-dropdown
 ```
+
+
+https://github.com/henninghall/react-native-date-picker#datepicker
+
+
+```
+npm install react-native-date-picker
+
+```
