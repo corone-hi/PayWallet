@@ -7,6 +7,7 @@ import SmsAndroid from 'react-native-get-sms-android';
 
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
+import axios from 'axios';
 
 const defaultContext: ISMSDataContext = {
   setData: (category: string, date: Date, shop: string, money: string) => {},
@@ -24,6 +25,10 @@ const SMSDataContextProvider = ({children}: Props) => {
     address: '',
     timestamp: '',
   });
+
+  const [cname, setCname] = useState(null);
+  const [dshop, setDshop] = useState(null);
+  const [dmoney, setDmoney] = useState(null);
 
   useEffect(() => {
     const filter = {
@@ -64,36 +69,38 @@ const SMSDataContextProvider = ({children}: Props) => {
   let body = messageData.body;
   console.log('messageData.body:', body);
 
-  body = body.replace(/\[Web발신\]/, '');
-  body = body.replace(/\(Web발신\)/, '');
-  body = body.replace(/체크카드출금/, '');
-  body = body.replace(/누적[\s:\-]?[\d,\-]+원/, '');
-  body = body.replace(/누적-[\d,\-]+원/, '');
-  body = body.replace(/잔액[\d,\-]+원?/, '');
-  body = body.replace(/[ㄱ-ㅎ|가-힣|a-z|A-Z]+\([\d\*]{4}\)/gi, '');
-  body = body.replace(/\S+은행/, '');
-  body = body.replace(/KEB하나/, '');
-  body = body.replace(/\S+카드/, '');
-  body = body.replace(/일시불/, '');
-  body = body.replace(/사용/, '');
-  body = body.replace(/일시불/, '');
-  body = body.replace(/\(금액\)/, '');
-  body = body.replace(/^잔액/, '');
-
-  console.log('body:', body);
-
   useEffect(() => {
     if (body.includes('승인') || !body.includes('취소')) {
       //body.replace(/취소/, '');
 
+      body = body.replace(/\[Web발신\]/, '');
+      body = body.replace(/\(Web발신\)/, '');
+      body = body.replace(/\(주\)/, '');
+      body = body.replace(/체크카드출금/, '');
+      body = body.replace(/누적[\s:\-]?[\d,\-]+원/, '');
+      body = body.replace(/누적-[\d,\-]+원/, '');
+      body = body.replace(/잔액[\d,\-]+원?/, '');
+      body = body.replace(/[ㄱ-ㅎ|가-힣|a-z|A-Z]+\([\d\*]{4}\)/gi, '');
+      body = body.replace(/\S+은행/, '');
+      body = body.replace(/KEB하나/, '');
+      body = body.replace(/\S+카드/, '');
+      body = body.replace(/일시불/, '');
+      body = body.replace(/사용/, '');
+      body = body.replace(/일시불/, '');
+      body = body.replace(/\(금액\)/, '');
+      body = body.replace(/^잔액/, '');
       body = body.replace(/\[[*ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+\]/, '');
       body = body.replace(/[*ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+승인/, '');
+      body = body = body.replace(/[*ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+점/, '');
       body = body.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣\*]{2,4}님/, '');
-      body = body.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣\*]{2,4}/, '');
+      body = body.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]\*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]?님/, '');
+      body = body.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]\*[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]?/, '');
+      
 
       const moneyrule = /[\d,\-]+원/;
       let money = moneyrule.exec(body);
       money = String(money);
+      setDmoney(money);
       console.log('money:', money); //완료
 
       body = body.replace(moneyrule, '');
@@ -113,23 +120,35 @@ const SMSDataContextProvider = ({children}: Props) => {
       body = body.replace(daterule, '');
 
       let shopname = body.trim();
+      setDshop(shopname);
       console.log('shopname:', shopname);
 
-      console.log('body:', body);
+      fetch(`http://192.168.38.124:8080/api/crawl/${shopname}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          console.log(data.class);
+          setCname(data.class);
+        });
 
-      let user = auth().currentUser;
+      console.log('result:', cname);
 
-      if (body && user) {
-        database()
-          .ref(`/user_wallet/${user.uid}/@${messageData.timestamp}`)
-          .set({
-            date: date,
-            shop: shopname,
-            money: money,
-          });
-      }
+      //let shop = JSON.stringify(shopname);
     }
   }, [body]);
+
+  useEffect(() => {
+    let user = auth().currentUser;
+
+    if (body && user && cname) {
+      database().ref(`/user_wallet/${user.uid}/@${messageData.timestamp}`).set({
+        shop: dshop,
+        money: dmoney,
+        class: cname,
+      });
+    }
+    //setCname('');
+  }, [body, cname, dmoney, dshop, messageData.timestamp]);
 
   const setData = (
     category: string,
@@ -140,12 +159,14 @@ const SMSDataContextProvider = ({children}: Props) => {
     let timestamp = date.getTime();
     let user = auth().currentUser;
 
-    database().ref(`/user_wallet/${user.uid}/@${timestamp}`).set({
-      category: category,
-      date: date,
-      shop: shop,
-      money: money,
-    });
+    if (user) {
+      database().ref(`/user_wallet/${user.uid}/@${timestamp}`).set({
+        category: category,
+        date: date,
+        shop: shop,
+        money: money,
+      });
+    }
   };
 
   return (

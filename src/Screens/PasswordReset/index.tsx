@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Alert} from 'react-native';
+
+import auth from '@react-native-firebase/auth';
 
 import Styled from 'styled-components/native';
 
@@ -60,13 +63,7 @@ interface Props {
 }
 
 const PasswordReset = ({navigation}: Props) => {
-  const [tabIndex, setTabIndex] = useState<number>(0);
-  const tabs = ['사용자 이름', '전화번호'];
-  const tabDescriptions = [
-    '사용자 이름 또는 이메일을 입력하면 다시 계정에 로그인 할 수 있는 링크를 보내드립니다',
-    '전화번호를 입력하면 계정에 다시 액세스할 수 있는 코드를 보내드립니다.',
-  ];
-  const placeholders = ['사용자 이름 또는 이메일', '전화번호'];
+  const [email, setEmail] = useState('');
 
   return (
     <Container>
@@ -75,22 +72,34 @@ const PasswordReset = ({navigation}: Props) => {
           <LockImage source={require('~/Assets/Images/lock.png')} />
         </LockImageContainer>
         <Title>로그인에 문제가 있나요?</Title>
-        <Description>{tabDescriptions[tabIndex]}</Description>
-        <TabContainer>
-          {tabs.map((label: string, index: number) => (
-            <Tab
-              key={`tab-${index}`}
-              selected={tabIndex === index}
-              label={label}
-              onPress={() => setTabIndex(index)}
-            />
-          ))}
-        </TabContainer>
+        <Description>
+          이메일을 입력하시면 비밀번호 재설정 메일이 전송됩니다.
+        </Description>
+
         <Input
           style={{marginBottom: 16}}
-          placeholder={placeholders[tabIndex]}
+          placeholder={'user@gmail.com'}
+          onChangeText={text => setEmail(text)}
         />
-        <Button label="다음" style={{marginBottom: 24}} />
+        <Button
+          label="다음"
+          style={{marginBottom: 24}}
+          onPress={() => {
+            let user = auth().currentUser;
+            if (user) {
+              auth()
+                .sendPasswordResetEmail(email)
+                .then(() => {
+                  Alert.alert('Please check your email');
+                })
+                .catch(function (e) {
+                  Alert.alert('e');
+                  console.log(e);
+                });
+            }
+            //navigation.navigate('PasswordReset');
+          }}
+        />
         <HelpLabel>도움이 더 필요하세요?</HelpLabel>
       </FormContainer>
       <Footer>
